@@ -1,8 +1,10 @@
 class Board
   attr_accessor :spots
   
-  PLAYER_1_MARK = "X"
-  PLAYER_2_MARK = "O"
+  PLAYER_MARK = {
+    1 => "X",
+    2 => "O"
+  }
 
   def initialize
     @spots = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
@@ -19,7 +21,19 @@ class Board
     ].join("\n")
   end
 
+  def change_spot(player)
+    
+    spot = false
+    until available_spot? spot
+      print ">> Player #{player}: "
+      spot = gets.chomp.to_i
+    end
+    @spots[spot] = PLAYER_MARK[player]
+  end
+
   def available_spot?(position)
-    true unless @spots[position] != "X" && @spots[position] != "O"
+    if position
+      true if @spots[position] != "X" && @spots[position] != "O"
+    end
   end
 end

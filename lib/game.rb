@@ -1,19 +1,16 @@
 class Game
   def initialize()
-    @game_config = GameConfig.new
     @board = Board.new
+    @game_config = GameConfig.new @board
 
-    # puts @game_config.player1.class
-    # puts @game_config.player2.class
-    # @board.draw
     start_game
+    game_over    
   end
 
   private 
 
   def start_game
     rotate_turn
-    game_over    
   end
 
   def game_over
@@ -24,8 +21,7 @@ class Game
 
     @game_config.player1.make_the_move
     @game_config.player2.make_the_move unless over_condition?(@board.spots) || tie_condition?(@board.spots)
-    
-    # rotate_turn
+    rotate_turn unless over_condition?(@board.spots) || tie_condition?(@board.spots)
   end
 
   def over_condition?(b)

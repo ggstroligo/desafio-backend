@@ -5,7 +5,8 @@ class GameConfig
   PLAYER_VS_COMPUTER   = "2"
   COMPUTER_VS_COMPUTER = "3"
   
-  def initialize 
+  def initialize(board)
+    @board        = board
     @game_mode    = Input::MainMenu.choose_mode
     @difficulty   = Input::MainMenu.choose_difficulty if @game_mode != PLAYER_VS_PLAYER
     set_players
@@ -15,18 +16,18 @@ class GameConfig
     case @game_mode
     when PLAYER_VS_PLAYER
       system "clear"
-      @player1 = Human.new
-      @player2 = Human.new
+      @player1 = Player::Human.new 1, @board
+      @player2 = Player::Human.new 2, @board
       
     when PLAYER_VS_COMPUTER
       system "clear"
-      @player1 = Human.new
-      @player2 = Computer.new      
+      @player1 = Player::Human.new 1, @board
+      @player2 = Player::Computer.new 2, @board      
       
     when COMPUTER_VS_COMPUTER
       system "clear"
-      @player1 = Computer.new      
-      @player2 = Computer.new      
+      @player1 = Player::Computer.new 1, @board      
+      @player2 = Player::Computer.new 2, @board      
       
     end
   end
