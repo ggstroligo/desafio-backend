@@ -2,30 +2,33 @@ class Game
   def initialize()
     @game_config = GameConfig.new
     @board = Board.new
-    
+
+    # puts @game_config.player1.class
+    # puts @game_config.player2.class
+    # @board.draw
     start_game
   end
 
-  def start_game
-    # start by printing the board
-    @board.draw
+  private 
 
+  def start_game
     rotate_turn
+    game_over    
+  end
+
+  def game_over
   end
 
   def rotate_turn
-    # loop through until the game was won or tied
-    until over_condition(@board) || tie(@board)
-      get_human_spot
-      if !over_condition(@board) && !tie(@board)
-        eval_board
-      end
-      puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n===+===+===\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n===+===+===\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
-    end
-    puts "Game over"
+    @board.draw
+
+    @game_config.player1.make_the_move
+    @game_config.player2.make_the_move unless over_condition?(@board.spots) || tie_condition?(@board.spots)
+    
+    # rotate_turn
   end
 
-  def over_condition(b)
+  def over_condition?(b)
 
     [b[0], b[1], b[2]].uniq.length == 1 ||
     [b[3], b[4], b[5]].uniq.length == 1 ||
@@ -37,7 +40,7 @@ class Game
     [b[2], b[4], b[6]].uniq.length == 1
   end
 
-  def tie(b)
+  def tie_condition?(b)
     b.all? { |s| s == "X" || s == "O" }
   end
 

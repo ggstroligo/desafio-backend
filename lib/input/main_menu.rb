@@ -1,6 +1,6 @@
 module Input
   class MainMenu
-    def self.chooseMode
+    def self.choose_mode
       system("clear")
       puts [
         "Tic Tac Toe",
@@ -10,10 +10,10 @@ module Input
         "3 - Computer vs Computer"
       ].join("\n")
 
-      mode = gets.chomp.to_i
+      gets.chomp
     end
 
-    def self.chooseDifficulty
+    def self.choose_difficulty
       system("clear")
       puts [
         "Tic Tac Toe",
@@ -23,7 +23,7 @@ module Input
         "3 - Master"
       ].join("\n")
 
-      mode = gets.chomp.to_i
+      gets.chomp
     end
   end
 end
