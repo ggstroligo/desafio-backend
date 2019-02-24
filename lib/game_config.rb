@@ -15,17 +15,17 @@ class GameConfig
   def set_players
     case @game_mode
     when PLAYER_VS_PLAYER
-      #system "clear"
+      system "clear"
       @player1 = Player::Human.new 1, @board
       @player2 = Player::Human.new 2, @board
       
     when PLAYER_VS_COMPUTER
-      #system "clear"
+      system "clear"
       @player1 = Player::Human.new 1, @board
       @player2 = Player::Computer.new 2, @board      
       
     when COMPUTER_VS_COMPUTER
-      #system "clear"
+      system "clear"
       @player1 = Player::Computer.new 1, @board      
       @player2 = Player::Computer.new 2, @board      
       

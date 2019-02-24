@@ -33,7 +33,7 @@ module Input
     end
 
     def self.choose_difficulty
-      #system("clear")
+      system("clear")
       puts [
         MENU_HEADER,
         "Choose difficulty",
