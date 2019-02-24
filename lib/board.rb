@@ -11,7 +11,7 @@ class Board
   end
 
   def draw
-    system "clear"
+    #system "clear"
     puts [
       "#{@spots[0]} | #{@spots[1]} | #{@spots[2]}",
       "==+===+==",
@@ -21,19 +21,24 @@ class Board
     ].join("\n")
   end
 
-  def change_spot(player)
+  def change_spot(player, spot=false)
     
-    spot = false
-    until available_spot? spot
-      print ">> Player #{player}: "
-      spot = gets.chomp.to_i
-    end
-    @spots[spot] = PLAYER_MARK[player]
+    spot = Input::Game.choose_move player
+    spot = spot.to_i
+
+    change_spot player, spot unless available_spot? spot
+    @spots[spot] = PLAYER_MARK[player] 
   end
 
-  def available_spot?(position)
+  def available_spot? position
+    false unless available_spot_option? position
     if position
+      position = position.to_i
       true if @spots[position] != "X" && @spots[position] != "O"
     end
+  end
+
+  def available_spot_option? position
+    Input::valid_option? position
   end
 end
