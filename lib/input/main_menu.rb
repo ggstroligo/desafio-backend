@@ -12,7 +12,7 @@ module Input
       "\n"
     ].join("\n")
 
-    def self.choose_mode option = nil, error = nil
+    def self.choose_mode(option = nil, error = nil)
       system("clear")
       puts [
         MENU_HEADER,
@@ -22,17 +22,21 @@ module Input
         "3 - Computer vs Computer"
       ].join("\n")
 
-      puts "\n#{error}"
-      puts "Choose a valid mode (1-3): "
-      print ">> "
-      option = gets.chomp
-      
-      return option if Input::valid_option? option, 1..3
-      
-      self.choose_mode option, "Invalid mode!"
+      option = Input::MainMenu.input_label("mode (1-3)", error)
+
+      return option if Input::valid_option?(option, 1..3)      
+      self.choose_mode option, "Invalid mode!"      
     end
 
-    def self.choose_difficulty
+    def self.input_label(kind, error = nil)
+      puts "\n#{error}"
+      puts "Choose a valid #{kind}: "
+      print ">> "
+
+      return gets.chomp
+    end
+
+    def self.choose_difficulty(option = nil, error = nil)
       system("clear")
       puts [
         MENU_HEADER,
@@ -42,7 +46,11 @@ module Input
         "3 - Master"
       ].join("\n")
 
-      gets.chomp
+      option = Input::MainMenu.input_label("mode (1-3)", error)
+
+      return option if Input::valid_option?(option, 1..3)      
+      self.choose_mode option, "Invalid mode!"  
     end
+
   end
 end
