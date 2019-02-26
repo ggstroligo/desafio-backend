@@ -37,21 +37,21 @@ class Game
     @board.draw
 
     @game_config.player1.make_the_move
-    @game_config.player2.make_the_move unless over_condition?(@board.spots) || tie_condition?(@board.spots)
+    @game_config.player2.make_the_move unless self.class.over_condition?(@board) || self.class.tie_condition?(@board)
 
-    rotate_turn unless over_condition?(@board.spots) || tie_condition?(@board.spots)
+    rotate_turn unless self.class.over_condition?(@board) || self.class.tie_condition?(@board)
   end
 
-  def over_condition?(b)
-    @board::finish_combinations.any? {|c| c.uniq.length == 1 }
+  def self.over_condition?(b)
+    b::finish_combinations.any? {|c| c.uniq.length == 1 }
   end
 
-  def tie_condition?(b)
-    b.all? { |s| s == "X" || s == "O" }
+  def self.tie_condition?(b)
+    b.spots.all? { |s| s == "X" || s == "O" }
   end
 
   def winner_check board
-    combinations_matched = board::finish_combinations.find {|c| c.uniq.length == 1}
+    combinations_matched = board.finish_combinations.find {|c| c.uniq.length == 1}
     
     return "tied" unless combinations_matched
 

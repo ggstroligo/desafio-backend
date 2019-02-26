@@ -25,7 +25,7 @@ class Board
 
   def draw
     puts [
-      "#{@spots[0]} | #{@spots[1]} | #{@spots[2]}",
+      "\n#{@spots[0]} | #{@spots[1]} | #{@spots[2]}",
       "==+===+==",
       "#{@spots[3]} | #{@spots[4]} | #{@spots[5]}",
       "==+===+==",
@@ -35,16 +35,16 @@ class Board
 
   def change_spot(player, spot=nil, error=nil)
     if available_spot? spot
-      @spots[spot] = PLAYER_MARK[player]
+      @spots[spot] = PLAYER_MARK[player] 
     else
       spot = Input::Game.choose_move(player, error)
       spot = spot.to_i
-      change_spot(player, spot, "Posição já preenchida!")
+      change_spot(player, spot, "Position already filled!")
     end
   end
 
   def available_spot? position
-    if position #&& available_spot_option?(position)
+    if position
       position = position.to_i
       true if @spots[position] != "X" && @spots[position] != "O"
     end
