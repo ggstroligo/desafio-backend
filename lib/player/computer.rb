@@ -1,8 +1,17 @@
 module Player
   class Computer
     
-    def initialize(player, board)
+    DIFFICULTY_TABLE = {
+      "1" => 20,
+      "2" => 50,
+      "3" => 70,
+      "4" => 90
+    }
+
+    def initialize(player, difficulty, board)
       @board = board
+      @difficulty = difficulty
+
       @player_number = player
       @oponent_number  = (@player_number == 1) ? 2 : 1
     end
@@ -52,13 +61,20 @@ module Player
         best_defensive_move = simulate_next_move(space, @oponent_number) || best_defensive_move
       end
 
-      best_move = best_offensive_move || best_defensive_move
+      best_move = if difficult_test 
+        best_offensive_move || best_defensive_move
+      end
+
       if best_move
         return best_move
       else
         n = rand(0..available_spaces.count)
         return available_spaces[n].to_i
       end
+    end
+
+    def difficult_test
+      rand(1..100) < DIFFICULTY_TABLE[@difficulty]
     end
 
     def simulate_next_move(spot, player)

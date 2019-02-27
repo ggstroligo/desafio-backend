@@ -41,15 +41,16 @@ module Input
       puts [
         MENU_HEADER,
         "Choose difficulty",
-        "1 - Adept",
-        "2 - Expert",
-        "3 - Master"
+        "1 - Novice",
+        "2 - Adept",
+        "3 - Expert",
+        "4 - Master"
       ].join("\n")
 
-      option = Input::MainMenu.input_label("mode (1-3)", error)
+      option = Input::MainMenu.input_label("difficulty (1-4)", error)
 
-      return option if Input::valid_option?(option, 1..3)      
-      self.choose_mode option, "Invalid mode!"  
+      return option if Input::valid_option?(option, 1..4)      
+      self.choose_mode option, "Invalid difficulty!"  
     end
 
   end

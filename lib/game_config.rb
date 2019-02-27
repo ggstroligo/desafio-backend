@@ -22,12 +22,12 @@ class GameConfig
     when PLAYER_VS_COMPUTER
       system "clear"
       @player1 = Player::Human.new 1, @board
-      @player2 = Player::Computer.new 2, @board      
+      @player2 = Player::Computer.new 2, @difficulty, @board      
       
     when COMPUTER_VS_COMPUTER
       system "clear"
-      @player1 = Player::Computer.new 1, @board      
-      @player2 = Player::Computer.new 2, @board      
+      @player1 = Player::Computer.new 1, @difficulty, @board      
+      @player2 = Player::Computer.new 2, @difficulty, @board      
       
     end
   end
