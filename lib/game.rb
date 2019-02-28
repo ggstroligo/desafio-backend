@@ -42,12 +42,12 @@ class Game
     rotate_turn unless self.class.over_condition?(@board) || self.class.tie_condition?(@board)
   end
 
-  def self.over_condition?(b)
-    b::finish_combinations.any? {|c| c.uniq.length == 1 }
+  def self.over_condition?(board)
+    board::finish_combinations.any? {|c| c.uniq.length == 1 }
   end
 
-  def self.tie_condition?(b)
-    b.spots.all? { |s| s == "X" || s == "O" }
+  def self.tie_condition?(board)
+    board.spots.all? { |s| s == "X" || s == "O" }
   end
 
   def winner_check board

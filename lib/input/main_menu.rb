@@ -25,7 +25,7 @@ module Input
       option = Input::MainMenu.input_label("mode (1-3)", error)
 
       return option if Input::valid_option?(option, 1..3)      
-      self.choose_mode option, "Invalid mode!"      
+      self.choose_mode(option, "Invalid mode!")      
     end
 
     def self.input_label(kind, error = nil)
@@ -50,7 +50,7 @@ module Input
       option = Input::MainMenu.input_label("difficulty (1-4)", error)
 
       return option if Input::valid_option?(option, 1..4)      
-      self.choose_mode option, "Invalid difficulty!"  
+      self.choose_difficulty(option, "Invalid difficulty!")
     end
 
   end

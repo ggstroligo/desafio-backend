@@ -25,11 +25,13 @@ class Board
 
   def draw
     puts [
-      "\n#{@spots[0]} | #{@spots[1]} | #{@spots[2]}",
+      "==+===+==",
+      "#{@spots[0]} | #{@spots[1]} | #{@spots[2]}",
       "==+===+==",
       "#{@spots[3]} | #{@spots[4]} | #{@spots[5]}",
       "==+===+==",
       "#{@spots[6]} | #{@spots[7]} | #{@spots[8]}",
+      "==+===+==",
     ].join("\n")
   end
 
